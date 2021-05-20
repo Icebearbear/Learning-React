@@ -22,3 +22,7 @@ what is really happening:
 3. once submit button is clicked, onClick will call the callback function handleSubmit
 4.  in callback function, it reference the input element, get its current value, and    update it with the state variable created at no.2
 
+Methods used:
+1. array filter method to remove data, filter() creates a new array with elements that pass the test implemented
+2. array map method to update data, map() creates new array populated with the results of calling, after you do some thing with the data
+3. array concat method to add data, concat() returns a new array after merging old and new arrays
