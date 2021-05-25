@@ -49,3 +49,7 @@ what is happening redux (backwards):
 3. provide the store to the app with a Provider from 'react-redux'
 4. created a reducer function that createStore take in as input. it returns the state as an object and it is where he data from no.2 is from. if anything happen, redux call reducer with current state and current action as argument. it will return a new state
 5. created a store with createStore(reducer) with 'redux'. 
+
+## JS
+
+1. Spread syntax (...) --> allows iterable such as array expression to be expanded with arguments or in this case is array elements

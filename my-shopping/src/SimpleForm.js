@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import 'bulma/css/bulma.min.css';
 import { connect } from 'react-redux'
@@ -19,18 +18,7 @@ import { connect } from 'react-redux'
   }
 }
 class Tab extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = { input : ''}; // declare state initial value called valueQ to be maintained by component 
-  }
-  handleChange = (e) => { // event handler
-    // set input to the current value
-    this.setState({ input: e.target.value}) // re-render when there is a change in valueQ
-  }
-  onAddItem = () => {
-    // dispatch to store 
-    this.props.dispatch({ type:"ADD", input:this.state.input})
-  }
+  
   // update item with item name input
   onUpdateItem = () => {
     this.props.dispatch({ type:"UPDATE", input:this.state.input})
