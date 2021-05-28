@@ -5,12 +5,18 @@ import 'bulma/css/bulma.min.css';
 // import Main from "./Main";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux'
-// import Tab from "./SimpleForm"
-import Input from './components/Input'
-import ViewTodo from './components/ViewTodo'
+import App from './App'
+import AddTodo from './components/AddTodo';
+import Input from './components/Input';
+import ViewTodo from './components/ViewTodo';
+
 const initialState = {
-  allIds: [],
-  byIds: {}
+  task : [
+      {
+      id: 1,
+      content: "icebear"
+    }
+  ]
 };
 
 // if anything happen, redux call reducer with current state and current action as argument
@@ -18,19 +24,9 @@ const initialState = {
 function reducer(state = initialState, action){
   switch(action.type){
     case "ADD": {
-      const { id, content } = action.payload;
-      // console.log(action.payload)
-
       return {
-        ...state, allIds: [...state.allIds, id],
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            content,
-            completed: false
-          }
-        }
-      } 
+        ...state, task : [...state.task , action.payload]
+      }
     }
     case "UPDATE":
       const list = state.valueQ.map(j => {
@@ -45,17 +41,10 @@ function reducer(state = initialState, action){
       }
 
     case "DELETE":
-      const { ide } = action.payload
-      console.log(ide)
-      function test(Todoid){
-        console.log(Todoid, " " , ide)
-        parseInt(Todoid) !== ide ? console.log('yes') : console.log("no")
-      } 
-      const filteredId = state.allIds.filter(Todoid => test(Todoid))
-      console.log(filteredId.map(id => typeof(id)))
-      // const filteredTodo = state.byIds.filter(TodoContent => TodoContent !== content)
+      console.log(action.payload)
+      const filteredId = state.task.filter(task => task.id !== action.payload.id)
       return {
-        ...state, allIds: filteredId
+        ...state, task : [...state.task , filteredId]
       } 
     case "RESET":
       console.log(state)
@@ -67,14 +56,12 @@ function reducer(state = initialState, action){
 }
 
 const store = createStore(reducer)
-const App = () => (
+const Index = () => (
   <Provider store={store}> 
-    {/* <Tab/> */}
-    <Input/>
-    <ViewTodo/>
+    <App/>
   </Provider>
 )
 
-ReactDOM.render(<App/>,  document.getElementById('root'));
+ReactDOM.render(<Index/>,  document.getElementById('root'));
 
 

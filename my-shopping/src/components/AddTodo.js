@@ -19,12 +19,8 @@ class AddTodo extends React.Component{
     }
 }
 
-const mapStateToProps = (state) => {
-  return {
-      values : state.byIds.content
-  }
-}
+
 
 // mapDispatchToProps --> addTodo. it is an object full of action creator 
 // it will turn into prop function that automatically dispatches its action when called 
-export default connect(mapStateToProps, {addTodo})(AddTodo) 
+export default connect(null, {addTodo})(AddTodo) 
