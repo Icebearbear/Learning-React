@@ -1,10 +1,11 @@
 let nextId = 0
 
-export const addTodo = (content) => ({
+export const addTodo = (content,date) => ({
     type: "ADD",
     payload: {
         id: ++nextId,
         content,
+        date
     }
 })
 

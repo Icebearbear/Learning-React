@@ -14,7 +14,8 @@ const initialState = {
   task : [
       {
       id: 1,
-      content: "icebear"
+      content: "icebear",
+      date : new Date()
     }
   ]
 };

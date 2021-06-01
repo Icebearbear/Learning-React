@@ -20,8 +20,6 @@ class NavigationBar extends React.Component{
                         <span></span>
                         <span></span>
                     </div>
-                
-                
                 <div id="navbarExampleTransparentExample" class="navbar-menu">
                 <div class="navbar-start">
                     <NavLink to="./viewTodo">

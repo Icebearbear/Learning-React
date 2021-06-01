@@ -5,7 +5,7 @@ import Input from '../components/Input'
 class AddTodo extends React.Component{
       onAddItem = () => {
         // pass to action creator
-        this.props.addTodo(this.props.data)
+        this.props.addTodo(this.props.data,this.props.date)
         this.setState({input:" "})
       }
     render(){
