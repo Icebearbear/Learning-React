@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './css/index.css';
 import 'bulma/css/bulma.min.css';
-// import Main from "./Main";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux'
 import App from './App'
-import AddTodo from './components/AddTodo';
-import Input from './components/Input';
-import ViewTodo from './components/ViewTodo';
+
 const initialState = {
   task : [
       {

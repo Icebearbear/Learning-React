@@ -2,12 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleTodo } from '../redux/actions';
 import { getTodos } from '../redux/selectors';
-import TodoToggle from './TodoToggle'
+import '../css/style.css'
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
 // class ViewTodo extends React.Component{
-    const ViewTodo = ({values, toggleTodo}) => (
+    const ViewTodo = ({values, toggleTodo}) => {
+
+        //calculate percentage of finished task
+        function progressValue(values){
+            const arrNo = 100/values.length
+            const notDoneNo = values.filter(todo => todo.completed === true).length
+            return 0 + Math.round((notDoneNo*arrNo) * 10) / 10
+        }
+        
+        return(
             <div class="column">
                 {/* <div class="dropdown is-hoverable">
                     <div class="dropdown-trigger">
@@ -34,12 +43,13 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
                         </div>
                     </div>
                 </div> */}
-                
+                <progress class="progress is-primary is-medium show-value" value={progressValue(values)} max="100"></progress>
+
                 <ul>{values && values.length ? 
 
                     values.map(todo => {
                         // debugger;
-                        return (
+                        return(
                             <li className="todo-item" onClick={() => {
                                 // debugger;
                                 console.log(toggleTodo(todo.id));
@@ -52,12 +62,13 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
                                     {todo.date.getDate()} {months[todo.date.getMonth()]} {todo.date.getFullYear()}
                                 </span>
                             </li>
-                        )
+                        ) 
                 })
                 : "No tasks today"} 
                 </ul> 
             </div>
-)
+        )
+        }
 
 // it takes the entire redux states and returns object, key -> props namees, value -> props value 
 const mapStateToProps = (state) => {
