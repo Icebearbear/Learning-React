@@ -1,12 +1,18 @@
-let nextId = 0
+let nextId = 1
 
 export const addTodo = (content,date) => ({
     type: "ADD",
     payload: {
         id: ++nextId,
         content,
-        date
+        date,
+        completed: false,
     }
+})
+
+export const toggleTodo = (id) => ({
+    type: "TOGGLE",
+    payload: {id}
 })
 
 export const deleteTodo = (content, id) => ({

@@ -9,13 +9,13 @@ import App from './App'
 import AddTodo from './components/AddTodo';
 import Input from './components/Input';
 import ViewTodo from './components/ViewTodo';
-
 const initialState = {
   task : [
       {
       id: 1,
       content: "icebear",
-      date : new Date()
+      date : new Date(),
+      completed : false,
     }
   ]
 };
@@ -29,6 +29,34 @@ function reducer(state = initialState, action){
         ...state, task : [...state.task , action.payload]
       }
     }
+
+    case "TOGGLE": {
+      const {id} = action.payload;
+      // console.log(id);
+      // debugger;
+
+      const newTask = [...state.task];
+      // state.task[id-1].completed = !state.task[id-1].completed;
+      // // newTask[id-1].completed = !state.task[id-1].completed;
+      // console.log(newTask[id-1].completed);
+      // // newTask[id-1].content = "lala"
+      // console.log(newTask);
+      // debugger;
+
+      return {
+        ...state,
+        task : newTask.map(todo => {
+          if(todo.id === id) {
+            return {
+              ...todo,
+              completed: !todo.completed
+            }
+          }
+          else return todo
+        })
+      }   
+    }
+
     case "UPDATE":
       const list = state.valueQ.map(j => {
         if(j === action.input){
