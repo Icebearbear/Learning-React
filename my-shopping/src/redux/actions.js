@@ -1,8 +1,8 @@
 import TodoDataServices from "../services/todo.service";
 import ID from "../ID"
-var ids = ID()
 
 export const addTodo = (content,date) => async(dispatch) =>{
+    var ids = ID()
     const inputs = {
         id: ids,
         content,
@@ -11,7 +11,6 @@ export const addTodo = (content,date) => async(dispatch) =>{
     }
     try {
         const res = await TodoDataServices.create(inputs);
-        debugger;
         dispatch({
             type: "ADD",
             payload: inputs

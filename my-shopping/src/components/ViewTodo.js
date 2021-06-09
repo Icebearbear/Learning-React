@@ -14,6 +14,7 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
             const arrNo = 100/values.length
             const notDoneNo = values.filter(todo => todo.completed === true).length
             return 0 + Math.round((notDoneNo*arrNo) * 10) / 10
+            // return 100
         }
         
         return(
@@ -72,9 +73,9 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 
 // it takes the entire redux states and returns object, key -> props namees, value -> props value 
 const mapStateToProps = (state) => {
-    // const val2 = getTodos(state)
+    const val2 = getTodos(state)
     return {
-        values : state.task
+        values : state.todoReducer.task
     }
   }
 export default connect(mapStateToProps, {toggleTodo})(ViewTodo)
