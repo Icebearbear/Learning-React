@@ -10,15 +10,6 @@ import Input from './Input';
 import ViewTodo from './ViewTodo';
 
 const NavigationBar = () => {
-    const [data, setData] = useState("")
-
-    useEffect(() => {
-        fetch("http://localhost:9000/testAPI")
-            .then(res => res.text())
-            .then(res => setData(res));
-            // debugger;
-    })
-
         return(    
             <HashRouter>
             <nav class="navbar-is-transparent">
@@ -64,7 +55,6 @@ const NavigationBar = () => {
                 </div>
             </nav>    
             <div class="content">
-                <p className="api-test">{data ? data : "Loading.." }</p>
                 <Route path="/addTodo" component={Input}/>
                 <Route path="/viewTodo"  component={ViewTodo}/>
             </div>

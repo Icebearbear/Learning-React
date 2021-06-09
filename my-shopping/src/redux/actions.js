@@ -1,14 +1,26 @@
-let nextId = 1
+import TodoDataServices from "../services/todo.service";
+import ID from "../ID"
+var ids = ID()
 
-export const addTodo = (content,date) => ({
-    type: "ADD",
-    payload: {
-        id: ++nextId,
+export const addTodo = (content,date) => async(dispatch) =>{
+    const inputs = {
+        id: ids,
         content,
         date,
         completed: false,
     }
-})
+    try {
+        const res = await TodoDataServices.create(inputs);
+        debugger;
+        dispatch({
+            type: "ADD",
+            payload: inputs
+        });
+        return Promise.resolve(res.data);
+    } catch(err){
+        return Promise.reject(err);
+    }
+};
 
 export const toggleTodo = (id) => ({
     type: "TOGGLE",

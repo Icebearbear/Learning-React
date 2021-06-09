@@ -22,9 +22,10 @@ app.get('/hello-world', (req, res) => {
 // create to db
 app.post('/api/create', (req, res) => {
     (async () => {
+      debugger;
         try {
           await db.collection('items').doc('/' + req.body.id + '/')
-              .create({item: req.body.item});
+              .create({item: req.body});
           return res.status(200).send();
         } catch (error) {
           console.log(error);

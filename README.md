@@ -2,8 +2,14 @@
 
 ## Running
 
-1. go to path directory
-2. npm start
+### REACT
+1. go to my-shopping and npm start
+2. open http://localhost:3000/
+
+### EXPRESS
+1.  go to servers/functions & npm run serve
+3.  base URL : http://localhost:5001/todolist2-b7979/us-central1/app/
+4.  add path for other functions
 
 ## Installation
 
@@ -13,9 +19,14 @@ npm install react-router-dom
 
 npm install react-redux
 
+npm install redux react-redux redux-thunk
+npm install --save-dev redux-devtools-extension
+
+npm i express
+npm i cors
+
 ## controlled components
 a component that its state is controlled by other components, it doesn't have a state
-
 
 <input> maintain its own state and update its state with user input.
 1. the state is updated with setState
@@ -50,6 +61,27 @@ what is happening redux (backwards):
 4. created a reducer function that createStore take in as input. it returns the state as an object and it is where he data from no.2 is from. if anything happen, redux call reducer with current state and current action as argument. it will return a new state
 5. created a store with createStore(reducer) with 'redux'. 
 
+improved changes:
+1.  used combinedReducer to use multiple reducers at once,    todoReducer is combined with combinedReducer at reducer/index
+2.  combinedReducer is exported as rootReducer is then used in Store
+3.  used thunk as middleware between react and redux store
+4.  all of the redux components are seperated inside folder redux/
+
 ## JS
 
 1. Spread syntax (...) --> allows iterable such as array expression to be expanded with arguments or in this case is array elements
+
+
+## ExpressJS
+ExpressJS is used as backend along with firebase.
+1. installed [express](https://www.npmjs.com/package/express), [cors](https://www.npmjs.com/package/cors) and [firebase CLI](https://firebase.google.com/docs/cli)
+2.  create a firebase object with firebase init
+3.  express and cors will be imported in foder functions/index.js. All the routes are inside
+4.  used atync and await to send request to db and return a response
+
+## Axios
+Axios is used to make http request from React
+1.  installed [Axios](https://www.npmjs.com/package/axios)
+2.  create a new instance of axios with a custom config, http-comon.js
+3.  all the services/routes to express is in folder services/todo.services.js as TodoDataServices
+4.  these routes is called in action creator before adding to Redux Store (from reducer)
