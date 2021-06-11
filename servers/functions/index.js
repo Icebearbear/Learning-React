@@ -25,12 +25,12 @@ app.post('/api/create', (req, res) => {
       debugger;
         try {
           await db.collection('items').doc('/' + req.body.id + '/')
-              .create({item: 
-                {
-                date: admin.firestore.Timestamp.fromDate(new Date(req.body.date)),
+              .create( {item: {
+                targetDate: admin.firestore.Timestamp.fromDate(new Date(req.body.targetDate)),
+                addedDate: admin.firestore.Timestamp.fromDate(new Date(req.body.addedDate)),
                 content: req.body.content,
                 completed: req.body.completed
-                }});
+              }});
           return res.status(200).send();
         } catch (error) {
           console.log(error);
@@ -52,7 +52,8 @@ app.get('/api/getAll', (req, res) => {
               const selectedItem = {
                   id: doc.id,
                   content: doc.data().item.content,
-                  date: doc.data().item.date.toDate().toDateString(),
+                  targetDate: doc.data().item.targetDate.toDate(),
+                  addedDate: doc.data().item.addedDate.toDate(),
                   completed: doc.data().item.completed,
               };
               response.push(selectedItem);
@@ -60,6 +61,27 @@ app.get('/api/getAll', (req, res) => {
           });
           // debugger;
           return res.status(200).send(response);
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+      }
+      })();
+  });
+
+// update
+app.put('/api/updateStatus/:id', (req, res) => {
+  (async () => {
+      try {
+          const document = db.collection('items').doc(req.params.id);
+          await document.update({
+            item: {
+              targetDate: admin.firestore.Timestamp.fromDate(new Date(req.body.targetDate)),
+              addedDate: admin.firestore.Timestamp.fromDate(new Date(req.body.addedDate)),
+              content: req.body.content,
+              completed: !req.body.completed
+            }
+          });
+          return res.status(200).send();
       } catch (error) {
           console.log(error);
           return res.status(500).send(error);
