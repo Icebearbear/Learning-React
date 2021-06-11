@@ -1,13 +1,17 @@
-import React from 'react';
+import { React, useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import { toggleTodo } from '../redux/actions';
+import { showTodo, toggleTodo } from '../redux/actions';
 import { getTodos } from '../redux/selectors';
 import '../css/style.css'
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
 // class ViewTodo extends React.Component{
-    const ViewTodo = ({values, toggleTodo}) => {
+    const ViewTodo = ({showTodo,values, toggleTodo}) => {
+        const [time, setTime] = useState('')
+
+        // triggered after every render, [] is to make it run only once
+        useEffect(()=> showTodo(), [])
 
         //calculate percentage of finished task
         function progressValue(values){
@@ -16,10 +20,26 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
             return 0 + Math.round((notDoneNo*arrNo) * 10) / 10
             // return 100
         }
+
+        function handleClick(){
+            values.sort((a,b) => a.date - b.date)
+            // debugger;
+            if(time == "day"){
+                return values.sort((a,b) => a.date - b.date)
+
+                // return "By Day"
+            }
+            if(time == "week"){
+                return "By Week"
+            }
+            else{ return "By Month"}
+        }
         
         return(
             <div class="column">
-                {/* <div class="dropdown is-hoverable">
+                <progress class="progress is-primary is-medium show-value" value={progressValue(values)} max="100"></progress>
+
+                <div class="dropdown is-hoverable">
                     <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
                         <span>Sort by</span>
@@ -29,46 +49,49 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
                         </button>
                     </div>
                     <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-                        <div class="dropdown-content">
-                        <div class="dropdown-item">
-                        <a href="#" class="dropdown-item">
-                            Day
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            Week
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            Month
-                        </a>
-                        </div>
+                        <div class="dropdown-content">    
+                            <div class="dropdown-item">
+                                <a class="dropdown-item" id="day" value="day" onClick={() => setTime('day')}>
+                                    Day
+                                </a>
+                                <a href="#" class="dropdown-item" onClick={() => handleClick("as")}>
+                                    Week
+                                </a>
+                                <a href="#" class="dropdown-item" onClick={() => handleClick("month")}>
+                                    Month
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div> */}
-                <progress class="progress is-primary is-medium show-value" value={progressValue(values)} max="100"></progress>
+                </div>
 
                 <ul>{values && values.length ? 
-
                     values.map(todo => {
+                        console.log('show ',typeof(todo.date))
                         // debugger;
                         return(
-                            <li className="todo-item" onClick={() => {
-                                // debugger;
-                                console.log(toggleTodo(todo.id));
-                                // debugger;
-                                console.log("tog ",todo.completed === true);
-                            }}>
-                                <span>   
-                                    {todo.completed ? "yes" : "no"  }{" "}
-                                    {todo.content}{" "}
-                                    {todo.date.getDate()} {months[todo.date.getMonth()]} {todo.date.getFullYear()}
-                                </span>
+                            <li className="todo-item" onClick={() => toggleTodo(todo.id)}>
+                                <div class="title">
+                                    {/* {time} */}
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        {todo.completed ? "yes" : "no"  }{" "}                                    
+                                    </div>
+                                    <div class = "column">
+                                        {todo.content}{" "}
+                                    </div>
+                                    <div class="column">
+                                        {todo.date} 
+                                    </div>      
+                                </div>
                             </li>
                         ) 
                 })
                 : "No tasks today"} 
-                </ul> 
-            </div>
-        )
+                </ul>
+                </div>
+                )
         }
 
 // it takes the entire redux states and returns object, key -> props namees, value -> props value 
@@ -78,4 +101,4 @@ const mapStateToProps = (state) => {
         values : state.todoReducer.task
     }
   }
-export default connect(mapStateToProps, {toggleTodo})(ViewTodo)
+export default connect(mapStateToProps, {toggleTodo, showTodo})(ViewTodo)

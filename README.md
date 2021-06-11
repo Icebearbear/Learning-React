@@ -85,3 +85,11 @@ Axios is used to make http request from React
 2.  create a new instance of axios with a custom config, http-comon.js
 3.  all the services/routes to express is in folder services/todo.services.js as TodoDataServices
 4.  these routes is called in action creator before adding to Redux Store (from reducer)
+
+### Routes
+/api/create --> create a document in database
+/api/getAll --> get all documents in database
+
+#### backend reference:
+1. https://bezkoder.com/react-redux-crud-example/
+2. https://indepth.dev/posts/1084/building-an-api-with-firebase

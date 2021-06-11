@@ -3,6 +3,7 @@ import ID from "../ID"
 
 export const addTodo = (content,date) => async(dispatch) =>{
     var ids = ID()
+    debugger;
     const inputs = {
         id: ids,
         content,
@@ -13,13 +14,27 @@ export const addTodo = (content,date) => async(dispatch) =>{
         const res = await TodoDataServices.create(inputs);
         dispatch({
             type: "ADD",
-            payload: inputs
+            payload: res.data
         });
         return Promise.resolve(res.data);
     } catch(err){
         return Promise.reject(err);
     }
 };
+
+export const showTodo = () => async(dispatch) => {
+    try {
+        const res = await TodoDataServices.getAll();
+        // debugger;
+        dispatch({
+            type: "SHOW",
+            payload: res.data
+        })
+        return Promise.resolve(res.data);
+    } catch(err){
+        return Promise.reject(err);
+    }
+}
 
 export const toggleTodo = (id) => ({
     type: "TOGGLE",

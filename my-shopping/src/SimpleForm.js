@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+// import './index.css';
 import 'bulma/css/bulma.min.css';
 import { connect } from 'react-redux'
 

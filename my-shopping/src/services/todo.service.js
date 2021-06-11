@@ -3,7 +3,7 @@ import http from "../http-common";
 // all routes to call express
 class TodoDataServices {
     getAll(){
-        return http.get("/api/todos")
+        return http.get("/api/getAll")
     }
     create(data){
         console.log(data)

@@ -25,12 +25,45 @@ app.post('/api/create', (req, res) => {
       debugger;
         try {
           await db.collection('items').doc('/' + req.body.id + '/')
-              .create({item: req.body});
+              .create({item: 
+                {
+                date: admin.firestore.Timestamp.fromDate(new Date(req.body.date)),
+                content: req.body.content,
+                completed: req.body.completed
+                }});
           return res.status(200).send();
         } catch (error) {
           console.log(error);
           return res.status(500).send(error);
         }
+      })();
+  });
+
+// read all
+app.get('/api/getAll', (req, res) => {
+  (async () => {
+      try {
+          let query = db.collection('items');
+          let response = [];
+          await query.get().then(querySnapshot => {
+          let docs = querySnapshot.docs;
+          debugger;
+          for (let doc of docs) {
+              const selectedItem = {
+                  id: doc.id,
+                  content: doc.data().item.content,
+                  date: doc.data().item.date.toDate().toDateString(),
+                  completed: doc.data().item.completed,
+              };
+              response.push(selectedItem);
+          }
+          });
+          // debugger;
+          return res.status(200).send(response);
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+      }
       })();
   });
 

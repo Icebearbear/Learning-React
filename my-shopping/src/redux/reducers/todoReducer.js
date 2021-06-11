@@ -1,12 +1,5 @@
 const initialState = {
-    task : [
-        {
-        id: 1,
-        content: "icebear",
-        date : new Date(),
-        completed : false,
-      }
-    ]
+    task : []
   };
 
 
@@ -22,17 +15,7 @@ export default function todoReducer(state = initialState, action){
   
       case "TOGGLE": {
         const {id} = action.payload;
-        // console.log(id);
-        // debugger;
-  
-        const newTask = [...state.task];
-        // state.task[id-1].completed = !state.task[id-1].completed;
-        // // newTask[id-1].completed = !state.task[id-1].completed;
-        // console.log(newTask[id-1].completed);
-        // // newTask[id-1].content = "lala"
-        // console.log(newTask);
-        // debugger;
-  
+        const newTask = [...state.task];  
         return {
           ...state,
           task : newTask.map(todo => {
@@ -46,6 +29,10 @@ export default function todoReducer(state = initialState, action){
           })
         }   
       }
+
+      case "SHOW":
+        // debugger;
+        return {...state, task : action.payload}
   
       case "UPDATE":
         const list = state.valueQ.map(j => {
