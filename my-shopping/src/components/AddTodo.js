@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../redux/actions'
 import Input from '../components/Input'
+
 class AddTodo extends React.Component{
       onAddItem = () => {
-        // pass to action creator
-        this.props.addTodo(this.props.data,this.props.date)
+        // const addedDate = Date.now()
+        // pass to action creator, props from Input component
+        this.props.addTodo(this.props.data,this.props.targetDate,this.props.addedDate)
         this.setState({input:" "})
       }
     render(){

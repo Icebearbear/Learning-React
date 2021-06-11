@@ -1,13 +1,14 @@
 import TodoDataServices from "../services/todo.service";
 import ID from "../ID"
 
-export const addTodo = (content,date) => async(dispatch) =>{
+export const addTodo = (content, targetDate, addedDate) => async(dispatch) =>{
     var ids = ID()
-    debugger;
+    // debugger;
     const inputs = {
         id: ids,
         content,
-        date,
+        targetDate,
+        addedDate,
         completed: false,
     }
     try {
@@ -36,10 +37,20 @@ export const showTodo = () => async(dispatch) => {
     }
 }
 
-export const toggleTodo = (id) => ({
-    type: "TOGGLE",
-    payload: {id}
-})
+export const toggleTodo = (id, data) => async(dispatch) => {
+    // debugger;
+    try{
+        const res = await TodoDataServices.updateStatus(id, data); // update in db
+        dispatch({ // update in store
+            type: "TOGGLE",
+            payload: data
+        })
+        // debugger;
+        return Promise.resolve(data);
+    }catch(err){
+        return Promise.reject(err);
+    }
+}
 
 export const deleteTodo = (content, id) => ({
     type: "DELETE",

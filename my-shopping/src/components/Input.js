@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Input = () => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [targetDate, setTargetDate] = useState(new Date());
   const [input, setInput] = useState('')
   return (
           <div class='columns'>
@@ -14,11 +14,11 @@ const Input = () => {
               <textarea class="textarea is-small" placeholder="e.g. Hello world" onChange={(e) => setInput(e.target.value)}></textarea>
             </div>
             <div>
-              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+              <DatePicker selected={targetDate} onChange={(date) => setTargetDate(date)} />
             </div>
             <div>
-              <AddTodo data={input} date={startDate}/>
-              <DeleteTodo data={input} date={startDate}/>
+              <AddTodo data={input} targetDate={targetDate} addedDate={new Date()}/>
+              <DeleteTodo data={input} targetDate={targetDate}/>
             </div>
             
           </div>

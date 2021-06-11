@@ -14,12 +14,11 @@ export default function todoReducer(state = initialState, action){
       }
   
       case "TOGGLE": {
-        const {id} = action.payload;
         const newTask = [...state.task];  
         return {
           ...state,
           task : newTask.map(todo => {
-            if(todo.id === id) {
+            if(todo.id === action.payload.id) {
               return {
                 ...todo,
                 completed: !todo.completed

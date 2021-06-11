@@ -67,10 +67,9 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 
                 <ul>{values && values.length ? 
                     values.map(todo => {
-                        console.log('show ',typeof(todo.date))
                         // debugger;
                         return(
-                            <li className="todo-item" onClick={() => toggleTodo(todo.id)}>
+                            <li className="todo-item" onClick={() => toggleTodo(todo.id, todo)}>
                                 <div class="title">
                                     {/* {time} */}
                                 </div>
@@ -82,7 +81,7 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
                                         {todo.content}{" "}
                                     </div>
                                     <div class="column">
-                                        {todo.date} 
+                                        {todo.targetDate} 
                                     </div>      
                                 </div>
                             </li>
