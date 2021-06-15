@@ -26,7 +26,6 @@ export const addTodo = (content, targetDate, addedDate) => async(dispatch) =>{
 export const showTodo = () => async(dispatch) => {
     try {
         const res = await TodoDataServices.getAll();
-        // debugger;
         dispatch({
             type: "SHOW",
             payload: res.data

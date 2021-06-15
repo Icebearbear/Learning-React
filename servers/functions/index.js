@@ -22,7 +22,6 @@ app.get('/hello-world', (req, res) => {
 // create to db
 app.post('/api/create', (req, res) => {
     (async () => {
-      debugger;
         try {
           await db.collection('items').doc('/' + req.body.id + '/')
               .create( {item: {
@@ -47,7 +46,6 @@ app.get('/api/getAll', (req, res) => {
           let response = [];
           await query.get().then(querySnapshot => {
           let docs = querySnapshot.docs;
-          debugger;
           for (let doc of docs) {
               const selectedItem = {
                   id: doc.id,
