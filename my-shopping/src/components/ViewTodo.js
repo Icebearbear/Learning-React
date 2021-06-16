@@ -9,7 +9,7 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 
 // class ViewTodo extends React.Component{
     const ViewTodo = ({showTodo,values, toggleTodo}) => {
-        const [time, setTime] = useState('day')
+        const [time, setTime] = useState('week')
 
         // triggered after every render, [] is to make it run only once
         useEffect(()=> showTodo(), [])
@@ -40,10 +40,10 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
                                 <a class="dropdown-item" id="day" value="day" onClick={() => setTime('day')}>
                                     Day
                                 </a>
-                                <a class="dropdown-item" onClick={() => setTime('week')}>
+                                <a class="dropdown-item" id="week" value="week" onClick={() => setTime('week')}>
                                     Week
                                 </a>
-                                <a class="dropdown-item" onClick={() => setTime('month')}>
+                                <a class="dropdown-item" id="month" value="month" onClick={() => setTime('month')}>
                                     Month
                                 </a>
                             </div>
